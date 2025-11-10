@@ -1,13 +1,13 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AdminRoutes from "./routes/AdminRoutes";
-import { AuthProvider } from "./context/authContext";
 import UserRoutes from "./routes/UserRoutes";
 import UserLayout from "./components/layout/UserLayout";
 import AdminLayout from "./components/layout/AdminLayout";
 import { CartProvider } from "./context/CartContext";
 import Landing from "./pages/Landing/Landing";
 import { PageProvider } from "./context/PageContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
