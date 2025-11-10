@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PopUpModel from "../../components/common/PopUpModel";
-import {
-  createCategory,
-  deleteCategory,
-  getCategories,
-  updateCategory,
-} from "../../api/category";
 import { toast, ToastContainer } from "react-toastify";
-import { createProduct, deleteProduct, getProducts } from "../../api/product";
-import ProductModal from "../../components/common/productModal";
 import { getUsers, updateUser } from "../../api/user";
 
 const Users = () => {
