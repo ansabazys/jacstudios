@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button";
 import { useCart } from "../../context/CartContext";
 import { createOrder } from "../../api/orders";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { updateByUser, updateUser } from "../../api/user";
 
 export const Checkout = () => {

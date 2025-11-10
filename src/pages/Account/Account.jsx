@@ -3,7 +3,7 @@ import { AccountSidebar } from "../../components/layout/Sidebar";
 import Button from "../../components/common/Button";
 import InputBox from "../../components/common/InputBox";
 import useWidth from "../../hooks/useWidth";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Account = () => {
   const width = useWidth();

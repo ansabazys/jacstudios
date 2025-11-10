@@ -8,7 +8,7 @@ import {
 } from "hugeicons-react";
 import React from "react";
 import { logOut } from "../../api/Auth";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {

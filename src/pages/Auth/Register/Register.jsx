@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./validation";
 import { handleRequest } from "../../../services/helper";
 import api from "../../../services/api";
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../../api/Auth";
 

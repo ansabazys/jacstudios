@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Modal from "../common/Modal";
 import MenuModal from "../common/MenuModal";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 
 const Navbar = () => {

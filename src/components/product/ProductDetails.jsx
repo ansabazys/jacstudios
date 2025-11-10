@@ -3,7 +3,7 @@ import { getProduct } from "../../api/product";
 import { useNavigate, useParams } from "react-router-dom";
 import InputBox from "../common/InputBox";
 import Button from "../common/Button";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { addToCart } from "../../api/cart";
 import { useCart } from "../../context/CartContext";
 import { toast, ToastContainer } from "react-toastify";

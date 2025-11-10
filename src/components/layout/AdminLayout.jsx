@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../admin/Sidebar";
 import Header from "../admin/Header";
 import Footer from "../admin/Footer";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const AdminLayout = ({ children }) => {

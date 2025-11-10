@@ -3,7 +3,7 @@ import useWidth from "../../hooks/useWidth";
 import MenuModal from "../common/MenuModal";
 import { logOut } from "../../api/Auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { getCategories } from "../../api/category";
 
 export const Sidebar = () => {

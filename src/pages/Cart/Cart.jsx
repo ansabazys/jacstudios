@@ -4,7 +4,7 @@ import Button from "../../components/common/Button";
 import { useCart } from "../../context/CartContext";
 import { createOrder } from "../../api/orders";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Cart = () => {
   const { cart } = useCart();

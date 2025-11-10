@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validation";
 import { loginAdmin, loginUser } from "../../../api/Auth";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
