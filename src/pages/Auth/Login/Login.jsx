@@ -4,7 +4,7 @@ import Button from "../../../components/common/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validation";
-import { loginAdmin, loginUser } from "../../../api/Auth";
+import { loginAdmin, loginUser } from "../../../api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";

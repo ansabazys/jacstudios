@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Navigate, useNavigate } from "react-router-dom";
 import { loginSchema } from "../Auth/Login/validation";
 import InputBox from "../../components/common/InputBox";
-import { loginAdmin, loginUser } from "../../api/Auth";
+import { loginAdmin, loginUser } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
 import Button from "../../components/common/Button";
 

@@ -7,7 +7,7 @@ import {
   UserIcon,
 } from "hugeicons-react";
 import React from "react";
-import { logOut } from "../../api/Auth";
+import { logOut } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 

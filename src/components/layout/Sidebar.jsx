@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useWidth from "../../hooks/useWidth";
 import MenuModal from "../common/MenuModal";
-import { logOut } from "../../api/Auth";
+import { logOut } from "../../api/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getCategories } from "../../api/category";
