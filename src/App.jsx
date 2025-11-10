@@ -7,7 +7,7 @@ import AdminLayout from "./components/layout/AdminLayout";
 import { CartProvider } from "./context/CartContext";
 import Landing from "./pages/Landing/Landing";
 import { PageProvider } from "./context/PageContext";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/authContext";
 
 function App() {
   return (
