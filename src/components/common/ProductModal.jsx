@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import InputBox from "./InputBox";
 import Button from "./Button";
-import { data } from "react-router-dom";
 
 const ProductModal = ({
   categories,

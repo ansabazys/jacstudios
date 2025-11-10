@@ -7,7 +7,7 @@ import {
   getProducts,
   updateProduct,
 } from "../../api/product";
-import ProductModal from "../../components/common/productModal";
+import ProductModal from "../../components/common/ProductModal";
 
 const Products = () => {
   const columns = [
