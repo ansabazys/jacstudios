@@ -7,8 +7,7 @@ This project helped me understand how real web apps work—from frontend logic t
 ---
 
 ## 📹 Demo Video
-> Add your demo video link here  
-<video src="https://res.cloudinary.com/dpxv43jt9/video/upload/v1763095663/1106_rxcalc.mp4" controls></video>
+[![Watch the demo](https://res.cloudinary.com/dpxv43jt9/image/upload/v1763095910/Screenshot_2025-11-13_184604_dzvbvw.png)](https://res.cloudinary.com/dpxv43jt9/video/upload/v1763095663/1106_rxcalc.mp4)
 
 ---
 
