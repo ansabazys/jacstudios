@@ -12,7 +12,6 @@ const Pagination = () => {
     pages.push(i);
   }
 
-  console.log(totalPages)
 
   const handleCurrentPage = (page) => {
     setCurrentPage(page);

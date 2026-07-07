@@ -6,21 +6,29 @@ import {
   updateOrder,
   updateOrderAdmin,
 } from "../../api/orders";
+import { usePage } from "../../context/PageContext";
+import Pagination from "../../components/common/Pagination";
 
 const Orders = () => {
   const columns = ["order id", "email", "time", "status", "price", "payment method", "actions"];
   const [orders, setOrders] = useState([]);
+  
+const { currentPage, setTotalPages, setCurrentPage } = usePage();
 
   const fetchOrders = async () => {
-    const [data, err] = await getOrdersAdmin();
-    if (data) setOrders(data);
+    const [data, err] = await getOrdersAdmin(currentPage, 10);
+    if (data) {
+       setOrders(data.orders)
+       setTotalPages(data.totalPages)
+    }
   };
 
   useEffect(() => {
     fetchOrders();
-  }, []);
 
-  console.log(orders);
+    return () => setCurrentPage(1)
+  }, [currentPage]);
+
 
   const handleCancel = async (orderId) => {
     const [data, err] = await updateOrderAdmin(orderId, {
@@ -57,7 +65,7 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((data) => {
+            {orders?.map((data) => {
               return (
                 <tr
                   key={data._id}
@@ -99,6 +107,7 @@ const Orders = () => {
           </tbody>
         </table>
 
+        <Pagination />
         <ToastContainer />
       </div>
     </div>

@@ -1,17 +1,21 @@
 import { Cancel01Icon } from "hugeicons-react";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AccountSidebar } from "../layout/Sidebar";
 
 const MenuModal = ({ setIsMenuOpen, isMenuOpen, menuData, color }) => {
+
+
+  const navigate = useNavigate()
+
 
   return (
     <AnimatePresence mode="wait">
       {isMenuOpen && (
         <motion.div
           key="menuModal"
-          className="fixed z-10 h-full overflow-scroll top-0 left-0 w-full bg-white"
+          className="fixed z-20 h-screen overflow-scroll top-0 left-0 w-full bg-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -35,8 +39,11 @@ const MenuModal = ({ setIsMenuOpen, isMenuOpen, menuData, color }) => {
           <div className="p-5">
             <ul className="font-semibold flex flex-col gap-2   text-start tracking-tight text-3xl">
               {menuData.map((data, index) => (
-                <li key={index} className="uppercase">
-                  {data}
+                <li key={index} className="uppercase" onClick={() => {
+                  navigate(`/category/${data._id}`)
+                  setIsMenuOpen(false)
+                }}>
+                  {data.title}
                 </li>
               ))}
             </ul>

@@ -33,8 +33,6 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  console.log(auth)
-
   const logout = async () => {
     const [data, err] = await logOut();
 

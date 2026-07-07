@@ -6,16 +6,18 @@ import { getCategoryProducts } from "../../api/category";
 import Pagination from "../common/Pagination";
 import { usePage } from "../../context/PageContext";
 
-const ProductGrid = ({ setProducts, products }) => {
-  const { currentPage, setTotalPages } = usePage();
+const ProductGrid = ({ setProducts, products = [] }) => {
   const { id } = useParams();
 
+  const { currentPage, setTotalPages } = usePage();
 
   const fetchProducts = async (categoryId) => {
     const response = categoryId
       ? getCategoryProducts(categoryId)
       : getProducts(currentPage);
     const [data, err] = await response;
+
+    console.log(data)
     if (data) {
       setProducts(data.products);
       setTotalPages(data.totalPages);
@@ -28,9 +30,9 @@ const ProductGrid = ({ setProducts, products }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col order-3 md:order-2 justify-center">
+    <div className="flex flex-col  order-3 md:order-2 justify-center">
       <div className="  w-full  flex flex-wrap justify-center">
-        {products.map((product, index) => (
+        {products?.map((product, index) => (
           <div
             key={index}
             className="relative w-[380px] text-center"
@@ -38,7 +40,7 @@ const ProductGrid = ({ setProducts, products }) => {
           >
             <div className="">
               <img
-                src={`${import.meta.env.VITE_IMAGE_URL}/${product.images[0]}`}
+               src={product.image?.url}
                 alt=""
               />
             </div>

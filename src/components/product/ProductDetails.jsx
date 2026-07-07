@@ -52,9 +52,9 @@ const ProductDetails = () => {
     <div className="py-20 px-15">
       <div className="flex">
         <div className="w-1/2 ">
-          {product?.images?.map((item) => (
-            <img src={`${import.meta.env.VITE_IMAGE_URL}/${item}`} alt="" />
-          ))}
+      
+            <img src={product?.image?.url || "/placeholder.png"} alt="" />
+        
         </div>
         <div className="w-1/2 flex-col gap-8 items-center py-20 flex">
           <div className="w-full max-w-sm leading-5">

@@ -1,8 +1,8 @@
 import api from "../services/api";
 import { handleRequest } from "../services/helper";
 
-export const getCategories = () => {
-  return handleRequest(api.get("/categories"));
+export const getCategories = (page, limit) => {
+  return handleRequest(api.get(`/categories?page=${page}&limit=${limit}`));
 };
 
 export const getCategoryProducts = (id) => {

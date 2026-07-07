@@ -15,6 +15,7 @@ const Hero = () => {
         loop
         muted
         autoPlay
+        playsInline
       />
 
       {/* Overlay */}

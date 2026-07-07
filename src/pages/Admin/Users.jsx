@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { getUsers, updateUser } from "../../api/user";
+import { usePage } from "../../context/PageContext";
+import Pagination from "../../components/common/Pagination";
 
 const Users = () => {
   const columns = ["name", "email", "time", "status", "actions"];
 
   const [users, setUsers] = useState([]);
+
+
+  const { currentPage, setTotalPages, setCurrentPage } = usePage();
 
   const handleUpdate = async (id, status) => {
     let update = status == "active" ? "inactive" : "active";
@@ -19,13 +24,17 @@ const Users = () => {
   };
 
   const fetchUsers = async () => {
-    const [data, err] = await getUsers();
-    if (data) setUsers(data);
+    const [data, err] = await getUsers(currentPage, 10);
+    if (data) {
+      setUsers(data.users);
+      setTotalPages(data.totalPages)
+    }
   };
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+    return () => setCurrentPage(1)
+  }, [currentPage]);
 
   console.log(users);
 
@@ -46,7 +55,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((data) => (
+            {users?.map((data) => (
               <tr
                 key={data._id}
                 className="grid border-b border-black/20 border-x grid-cols-5 p-5 place-items-center"
@@ -69,6 +78,7 @@ const Users = () => {
           </tbody>
         </table>
 
+            <Pagination />
         <ToastContainer />
       </div>
     </div>

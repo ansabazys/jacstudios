@@ -19,9 +19,10 @@ const Modal = ({ setShowSearch }) => {
   };
 
 
+
   return (
-    <div className="absolute left-0  w-full top-0 backdrop-blur-2xl  h-screen">
-      <div className="bg-white w-1/3 flex flex-col gap-10  p-10 h-screen pr-15">
+    <div className="absolute left-0 bg-white  w-full top-0 backdrop-blur-2xl  h-screen">
+      <div className="bg-white md:w-1/3 w-full flex flex-col gap-10  p-10 h-screen pr-15">
         <form action="" className="flex border-b">
           <input
             type="text"

@@ -1,6 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import InputBox from "./InputBox";
 import Button from "./Button";
+
+const initialState = {
+  title: "",
+  description: "",
+  image: null,
+  price: 0,
+  categoryId: "",
+  sizes: [
+    { size: "S", stock: 0 },
+    { size: "M", stock: 0 },
+    { size: "L", stock: 0 },
+    { size: "XL", stock: 0 },
+  ],
+  stockStatus: "out of stock",
+};
 
 const ProductModal = ({
   categories,
@@ -9,141 +24,133 @@ const ProductModal = ({
   handleSubmit,
   setIsOpen,
 }) => {
-  console.log(productData.images[0]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData((prev) => ({ ...prev, [name]: value }));
+
+    setProductData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleImageChange = (e) => {
-    console.log()
-    setProductData((prev) => ({ ...prev, images: [...e.target.files] }));
+    setProductData((prev) => ({
+      ...prev,
+      image: e.target.files[0],
+    }));
   };
 
   const handleSize = (size, e) => {
     const stock = Number(e.target.value);
-    setProductData((prev) => {
-      const exists = prev?.sizes?.find((s) => s.size === size);
 
-      return {
-        ...prev,
-        sizes: exists
-          ? prev?.sizes.map((s) => (s.size === size ? { ...s, stock } : s))
-          : [...prev?.sizes, { size, stock }],
-      };
-    });
+    setProductData((prev) => ({
+      ...prev,
+      sizes: prev.sizes.map((item) =>
+        item.size === size ? { ...item, stock } : item,
+      ),
+    }));
   };
 
   return (
-    <div className=" w-full  flex absolute left-0 justify-center">
+    <div className="absolute left-0 flex w-full justify-center">
       <form
-        className=" w-full bg-white p-5 border max-w-lg flex flex-col gap-5"
+        className="flex w-full max-w-lg flex-col gap-5 border bg-white p-5"
         onSubmit={(e) => handleSubmit(e, productData._id)}
       >
-        <div className="w-full flex justify-end">
+        <div className="flex justify-end">
           <button
+            type="button"
             className="text-xs"
             onClick={() => {
-              setIsOpen((prev) => !prev);
-              setProductData({
-                title: "",
-                description: "",
-                images: [],
-                price: 0,
-                categoryId: "",
-                sizes: [
-                  { size: "S", stock: 0 },
-                  { size: "M", stock: 0 },
-                  { size: "L", stock: 0 },
-                  { size: "XL", stock: 0 },
-                ],
-                stockStatus: "out of stock",
-              });
+              setIsOpen(false);
+              setProductData(initialState);
             }}
           >
             CLOSE
           </button>
         </div>
-        <div className="">
-          <InputBox
-            name="title"
-            label="Title"
-            defaultValue={productData.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="">
-          <InputBox
-            name="price"
-            label="Price"
-            type="number"
-            min="0"
-            onChange={handleChange}
-            defaultValue={productData.price}
-          />
-        </div>
 
-        <div className="">
-          <label htmlFor="">Description</label>
+        <InputBox
+          name="title"
+          label="Title"
+          value={productData.title}
+          onChange={handleChange}
+        />
+
+        <InputBox
+          name="price"
+          label="Price"
+          type="number"
+          min="0"
+          value={productData.price}
+          onChange={handleChange}
+        />
+
+        <div>
+          <label>Description</label>
+
           <textarea
-            className="border w-full p-2"
+            className="w-full border p-2"
             rows={5}
             name="description"
-            id=""
+            value={productData.description}
             onChange={handleChange}
-            defaultValue={productData.description}
-          ></textarea>
+          />
         </div>
 
         <div className="flex gap-5">
-          <label htmlFor="">Category</label>
+          <label>Category</label>
+
           <select
             name="categoryId"
-            id=""
             className="border"
+            value={productData.categoryId}
             onChange={handleChange}
-            defaultValue={
-              productData.categoryId.length > 0 ? productData.categoryId : ""
-            }
           >
-            <option value="" disabled>
-              Select a category
-            </option>
+            <option value="">Select Category</option>
 
-            {categories?.map((cate, key) => (
-              <option key={key} value={cate._id}>
-                {cate.title}
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.title}
               </option>
             ))}
           </select>
         </div>
 
         <div>
-          <h1>size</h1>
-          {productData.sizes.map((data, key) => (
-            <div key={key} className="flex items-center gap-5">
-              <h1>{data.size}</h1>
+          <h2 className="mb-2 font-semibold">Sizes</h2>
+
+          {productData.sizes.map((item) => (
+            <div key={item.size} className="mb-2 flex items-center gap-4">
+              <span className="w-8">{item.size}</span>
+
               <input
                 type="number"
-                name=""
-                id=""
-                placeholder={data.stock}
-                onChange={(e) => handleSize(data.size, e)}
-                className="w-fit border-b outline-none"
+                min="0"
+                value={item.stock}
+                onChange={(e) => handleSize(item.size, e)}
+                className="border-b outline-none"
               />
             </div>
           ))}
         </div>
 
-        <img
-          src={`${import.meta.env.VITE_IMAGE_URL}/${productData?.images[0]}`}
-          className="w-20"
-          alt="d"
-        />
-        <input type="file" multiple onChange={handleImageChange} />
+        {/* Image Preview */}
+        {productData.image && (
+          <img
+            src={
+              productData.image instanceof File
+                ? URL.createObjectURL(productData.image)
+                : productData.image.url
+            }
+            alt="Product"
+            className="h-24 w-24 rounded object-cover"
+          />
+        )}
 
-        <Button type="submit" value="Add" />
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+
+        <Button type="submit" value={productData._id ? "Edit" : "Add"} />
       </form>
     </div>
   );

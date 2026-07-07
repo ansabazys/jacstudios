@@ -14,7 +14,7 @@ import accessories from '../../assets/accessories.avif'
 const Landing = () => {
 
   const [categories, setCategories] = useState([])
-  const {products} = useProducts()
+  const { products = [] } = useProducts();
   const navigate = useNavigate()
 
 
@@ -24,7 +24,7 @@ const Landing = () => {
   useEffect(() => {
     (async () => {
       const [data, err] = await getCategories()
-      if(data) setCategories(data)
+      if(data) setCategories(data.category)
     })()
   },[])
 
@@ -43,7 +43,7 @@ const Landing = () => {
         </motion.h2>
 
         <div className="overflow-x-scroll scrollbar-hide flex w-full">
-          {products.map((col, i) => (
+          {products?.map((col, i) => (
             <motion.div
               key={i}
               className="relative shrink-0 overflow-hidden group"
@@ -53,7 +53,7 @@ const Landing = () => {
               onClick={() => navigate(`/store/${col._id}`)}
             >
               <img
-                src={`${import.meta.env.VITE_IMAGE_URL}/${col.images[0]}`}
+                src={col.image?.url || "/placeholder.png"}
                 alt={col.title}
                 className="w-[380px] shrink-0 object-cover transition-transform duration-500 group-hover:scale-110"
               />

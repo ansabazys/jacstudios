@@ -8,6 +8,8 @@ import {
   updateProduct,
 } from "../../api/product";
 import ProductModal from "../../components/common/ProductModal";
+import { usePage } from "../../context/PageContext";
+import Pagination from "../../components/common/Pagination";
 
 const Products = () => {
   const columns = [
@@ -23,7 +25,7 @@ const Products = () => {
   const [productData, setProductData] = useState({
     title: "",
     description: "",
-    images: [],
+    images: null,
     price: 0,
     categoryId: "",
     sizes: [
@@ -39,6 +41,8 @@ const Products = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
+  const { currentPage, setTotalPages, setCurrentPage } = usePage();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -49,10 +53,9 @@ const Products = () => {
     formData.append("categoryId", productData.categoryId);
     formData.append("stockStatus", productData.stockStatus);
 
-    productData.images?.map((img) => {
-      formData.append("images", img);
-    });
-
+    if (productData.image) {
+      formData.append("image", productData.image);
+    }
     formData.append("sizes", JSON.stringify(productData.sizes));
 
     const [data, err] = await createProduct(formData);
@@ -61,7 +64,7 @@ const Products = () => {
       setProductData({
         title: "",
         description: "",
-        images: [],
+        images: null,
         price: 0,
         categoryId: "",
         sizes: [
@@ -90,16 +93,16 @@ const Products = () => {
 
     formData.append("sizes", JSON.stringify(productData.sizes));
 
-    productData.images.map((item) => {
-      formData.append("images", item);
-    });
+    if (productData.image instanceof File) {
+      formData.append("image", productData.image);
+    }
 
     const [data, err] = await updateProduct(formData, id);
     if (data) {
       setProductData({
         title: "",
         description: "",
-        images: [],
+        images: null,
         price: 0,
         categoryId: "",
         sizes: [
@@ -132,19 +135,24 @@ const Products = () => {
   };
 
   const fetchProducts = async () => {
-    const [data, err] = await getProducts();
-    if (data) setProducts(data.products);
+    const [data, err] = await getProducts(currentPage, 5);
+    if (data) {
+      setProducts(data.products);
+      setTotalPages(data.totalPages);
+    }
   };
 
   const fetchCategories = async () => {
     const [data, err] = await getCategories();
-    if (data) setCategories(data);
+    if (data) setCategories(data.category);
   };
 
   useEffect(() => {
     fetchCategories();
     fetchProducts();
-  }, []);
+
+    return () => setCurrentPage(1);
+  }, [currentPage]);
 
   return (
     <div className="p-5 h-screen overflow-y-scroll">
@@ -188,7 +196,7 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((data) => (
+            {products?.map((data) => (
               <tr
                 key={data._id}
                 className="grid border-b border-black/20 border-x grid-cols-8 p-5 place-items-center"
@@ -196,8 +204,8 @@ const Products = () => {
                 <td>
                   <img
                     className="w-15"
-                    src={`${import.meta.env.VITE_IMAGE_URL}/${data.images[0]}`}
-                    alt=""
+                    src={data.image?.url}
+                    alt={data.title}
                   />
                 </td>
                 <td>{data.title}</td>
@@ -214,7 +222,7 @@ const Products = () => {
                   {data?.sizes.map((item, key) => (
                     <div key={key} className="border flex gap-2 px-2">
                       <p>{item.size}:</p>
-                      <p>{item.stock}</p> 
+                      <p>{item.stock}</p>
                     </div>
                   ))}
                 </td>
@@ -222,7 +230,10 @@ const Products = () => {
                 <td className="flex gap-5">
                   <button
                     onClick={() => {
-                      setProductData(data);
+                      setProductData({
+                        ...data,
+                        image: data.image,
+                      });
                       setIsEditOpen(!isEditOpen);
                     }}
                     className="border px-5 rounded-sm border-yellow-400"
@@ -240,6 +251,8 @@ const Products = () => {
             ))}
           </tbody>
         </table>
+
+        <Pagination />
 
         <ToastContainer />
       </div>

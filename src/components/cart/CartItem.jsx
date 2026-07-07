@@ -15,17 +15,19 @@ const CartItem = ({ item }) => {
 
   const handleUpdate = async (id, qty) => {
     const { stock } = item.productId.sizes.find(
-      (dt) => dt.size === item.selectedSize
+      (dt) => dt.size === item.selectedSize,
     );
     if (qty <= stock) {
       const [data, err] = await updateCart(id, { quantity: qty });
       if (data) setCart(data);
     } else {
       toast(
-        `You cannot add ${qty} items to your cart. Only ${stock} are in stock.`
+        `You cannot add ${qty} items to your cart. Only ${stock} are in stock.`,
       );
     }
   };
+
+  console.log(item)
 
   return (
     <>
@@ -33,9 +35,7 @@ const CartItem = ({ item }) => {
         <div className="flex">
           <div className="">
             <img
-              src={`${import.meta.env.VITE_IMAGE_URL}/${
-                item?.productId?.images[0]
-              }`}
+              src={item?.productId?.image?.url}
               className="w-20 p-2"
               alt=""
             />

@@ -51,7 +51,7 @@ const OrdersChart = () => {
     })();
   }, []);
 
-  console.log(data);
+
 
   // const data = [
   //   { month: "Jan", orders: 40 },

@@ -8,6 +8,8 @@ import {
   updateCategory,
 } from "../../api/category";
 import { toast, ToastContainer } from "react-toastify";
+import { usePage } from "../../context/PageContext";
+import Pagination from "../../components/common/Pagination";
 
 const Category = () => {
   const columns = ["name", "description", "products", "time", "actions"];
@@ -21,6 +23,8 @@ const Category = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
+  const { currentPage, setTotalPages } = usePage();
+
   const handleSubmit = async () => {
     const [data, err] = await createCategory(formData);
     console.log(data);
@@ -29,6 +33,9 @@ const Category = () => {
       toast("Category created successfully", { autoClose: 1000 });
       setCategories((prev) => [...prev, data.category]);
       setIsOpen((prev) => !prev);
+    }
+    if(err) {
+      toast(err.error, {autoClose: 1000})
     }
   };
 
@@ -39,7 +46,7 @@ const Category = () => {
       setFormData({ title: "", description: "", id: "" });
       toast("Category updated successfully", { autoClose: 1000 });
       const [data, err] = await getCategories();
-      setCategories(data);
+      setCategories(data.category );
       setIsEditOpen((prev) => !prev);
     }
   };
@@ -57,8 +64,12 @@ const Category = () => {
   };
 
   const fetchCategories = async () => {
-    const [data, err] = await getCategories();
-    if (data) setCategories(data);
+    const [data, err] = await getCategories(currentPage, 10);
+    if (data) {
+      setCategories(data.category);
+      setTotalPages(data.totalPages)
+    }
+  
   };
 
   const fetchCategoryProducts = async () => {
@@ -68,7 +79,7 @@ const Category = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="p-5">
@@ -105,7 +116,7 @@ const Category = () => {
             </tr>
           </thead>
           <tbody>
-            {categories.map((data, key) => (
+            {categories?.map((data, key) => (
               <tr
                 key={data._id}
                 className="grid border-b border-black/20 border-x grid-cols-5 p-5 place-items-center"
@@ -139,7 +150,7 @@ const Category = () => {
             ))}
           </tbody>
         </table>
-
+        <Pagination />
         <ToastContainer />
       </div>
     </div>

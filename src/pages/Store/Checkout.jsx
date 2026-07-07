@@ -67,7 +67,7 @@ export const Checkout = () => {
               placeholder="Full Name"
               className="border border-black/15 px-3 py-2 rounded-md"
               onChange={handleChange}
-              defaultValue={auth.data.address.fullName}
+              defaultValue={auth?.data?.address?.fullName}
             />
             <input
               type="number"
@@ -75,7 +75,7 @@ export const Checkout = () => {
               placeholder="Phone Number"
               className="border border-black/15 px-3 py-2 rounded-md"
               onChange={handleChange}
-              defaultValue={auth.data.address.phoneNumber}
+              defaultValue={auth?.data?.address?.phoneNumber}
             />
             <input
               type="text"
@@ -83,7 +83,7 @@ export const Checkout = () => {
               placeholder="Address Line 1"
               className="border border-black/15 px-3 py-2 rounded-md col-span-2"
               onChange={handleChange}
-              defaultValue={auth.data.address.addressLine}
+              defaultValue={auth?.data?.address?.addressLine}
             />
             <input
               type="text"
@@ -91,7 +91,7 @@ export const Checkout = () => {
               name="city"
               className="border border-black/15 px-3 py-2 rounded-md"
               onChange={handleChange}
-              defaultValue={auth.data.address.city}
+              defaultValue={auth?.data?.address?.city}
             />
             <input
               type="text"
@@ -99,7 +99,7 @@ export const Checkout = () => {
               name="state"
               className="border border-black/15 px-3 py-2 rounded-md"
               onChange={handleChange}
-              defaultValue={auth.data.address.state}
+              defaultValue={auth?.data?.address?.state}
             />
             <input
               type="text"
@@ -107,7 +107,7 @@ export const Checkout = () => {
               placeholder="Postal Code"
               className="border border-black/15 px-3 py-2 rounded-md"
               onChange={handleChange}
-              defaultValue={auth.data.address.postalCode}
+              defaultValue={auth?.data?.address?.postalCode}
             />
           </div>
         </div>
@@ -146,7 +146,7 @@ export const Checkout = () => {
               <div className="flex gap-2 items-center">
                 <img
                   src={`${import.meta.env.VITE_IMAGE_URL}/${
-                    item?.productId?.images[0]
+                    item?.productId?.image?.url
                   }`}
                   alt={item.productName}
                   className="w-12 h-12 object-cover rounded"

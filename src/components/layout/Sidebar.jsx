@@ -14,13 +14,12 @@ export const Sidebar = () => {
   useEffect(() => {
     (async () => {
       const [data, err] = await getCategories();
-      if (data) setCategories(data);
+      if (data) setCategories(data.category);
     })();
   }, []);
 
   const navigate = useNavigate();
   const { id } = useParams();
-
 
   return (
     <div className="w-1/2 p-5 left-0 md:ml-15 md:fixed md:p-0 h-full md:w-fit md:border-0 md:h-fit order-1 border-y border-black/15">
@@ -64,7 +63,7 @@ export const AccountSidebar = ({ className, ulClassName }) => {
   const { auth, setAuth, logout } = useAuth();
 
   return (
-    <div className={`flex flex-col gap-5 ${className}`}>
+    <div className={`flex text-start flex-col gap-5 ${className}`}>
       <h1>ACCOUNT</h1>
 
       <ul className={ulClassName}>

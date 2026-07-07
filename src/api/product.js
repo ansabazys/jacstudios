@@ -1,8 +1,8 @@
 import api from "../services/api";
 import { handleRequest } from "../services/helper";
 
-export const getProducts = (page) => {
-  return handleRequest(api.get(`/products?page=${page}`));
+export const getProducts = (page, limit ) => {
+  return handleRequest(api.get(`/products?page=${page}&limit=${limit}`));
 };
 export const getProduct = (id) => {
   return handleRequest(api.get(`/products/${id}`));

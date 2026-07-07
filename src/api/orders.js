@@ -4,8 +4,8 @@ import { handleRequest } from "../services/helper";
 export const getOrders = () => {
   return handleRequest(api.get("/user/orders"));
 };
-export const getOrdersAdmin = () => {
-  return handleRequest(api.get("/admin/orders"));
+export const getOrdersAdmin = (page, limit) => {
+  return handleRequest(api.get(`/admin/orders?page=${page}&limit=${limit}`));
 };
 
 export const createOrder = (data) => {
