@@ -1,16 +1,57 @@
-# React + Vite
+# Mini E-Commerce App (MERN + Tailwind + AWS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack mini e-commerce application built using the **MERN stack**, featuring user authentication, cart functionality, an ordering system, an admin dashboard with analytics, and full deployment on **AWS EC2** with HTTPS enabled.
 
-Currently, two official plugins are available:
+This project helped me understand how real web apps work—from frontend logic to backend architecture to deployment and server management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📹 Demo Video
+[![Watch the demo](https://res.cloudinary.com/dpxv43jt9/image/upload/v1763095910/Screenshot_2025-11-13_184604_dzvbvw.png)](https://res.cloudinary.com/dpxv43jt9/video/upload/v1763095663/1106_rxcalc.mp4)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 👤 User Features
+- User registration & login  
+- Session-based authentication  
+- Browse products  
+- Add / remove items from cart  
+- Place orders  
+- View order history  
+
+### 🛠️ Admin Dashboard
+- View all orders  
+- Manage products  
+- Sales analytics  
+- Dashboard UI built with Tailwind  
+
+### ⚙️ Backend
+- Express REST API  
+- Session-based auth  
+- MongoDB with Mongoose  
+- Protected routes  
+- PM2 for production  
+
+### 🎨 Frontend
+- React + Tailwind CSS  
+- Reusable components  
+- Fully responsive  
+
+### ☁️ Deployment
+- Hosted on **AWS EC2 (Ubuntu)**  
+- NGINX reverse proxy  
+- Backend running with **PM2**  
+- HTTPS enabled with Certbot  
+- Security Groups (firewall) configured  
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend:** React, Tailwind CSS, Axios  
+**Backend:** Node.js, Express, MongoDB, Sessions, PM2  
+**Deployment:** AWS EC2, NGINX, Certbot  
+
+
