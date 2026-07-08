@@ -23,13 +23,14 @@ export const Checkout = () => {
   });
 
   useEffect(() => {
-    if(auth.data) setAddress(auth.data.address)
-  }, []);
+    if (auth?.data?.address) {
+      setAddress(auth.data.address);
+    }
+  }, [auth]);
 
   const handleChange = (e) => {
     setAddress((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
 
   const handlePlaceOrder = async () => {
     const [data, err] = await createOrder({
