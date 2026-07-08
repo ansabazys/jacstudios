@@ -9,7 +9,7 @@ import { getCategories } from "../../api/category";
 import clothing from '../../assets/clothing.avif'
 import bag from '../../assets/bag.avif'
 import shoe from '../../assets/shoe.avif'
-import accessories from '../../assets/accessories.avif'
+import rings from '../../assets/accessories.avif'
 
 const Landing = () => {
 
@@ -18,7 +18,7 @@ const Landing = () => {
   const navigate = useNavigate()
 
 
-  const catImages = [clothing, accessories, bag, shoe]
+  const catImages = [rings, shoe, bag, clothing]
   
 
   useEffect(() => {
