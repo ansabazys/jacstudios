@@ -8,6 +8,7 @@ import InputBox from "../../components/common/InputBox";
 import { loginAdmin, loginUser } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
 import Button from "../../components/common/Button";
+import Navbar from "../../components/layout/Navbar";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const AdminLogin = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  if(auth.role?.includes("admin")) return <Navigate to={"/admin/dashboard"} />
+  if (auth.role?.includes("admin")) return <Navigate to={"/admin/dashboard"} />;
 
   const formSubmit = async (data) => {
     const response = loginAdmin(data);
@@ -30,30 +31,33 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="flex w-full py-30 items-center  justify-center">
-      <div className="h-full w-full p-5 max-w-lg justify-center gap-5 items-start flex flex-col ">
-        <h1 className="text-sm ">ADMIN LOGIN</h1>
-        <form
-          onSubmit={handleSubmit(formSubmit)}
-          className="flex w-full flex-col gap-5 "
-        >
-          <InputBox
-            type="email"
-            placeholder="Email"
-            {...register("email")}
-            errors={errors?.email?.message}
-          />
-          <InputBox
-            type="password"
-            placeholder="Password"
-            {...register("password")}
-            errors={errors?.password?.message}
-          />
-      
-          <Button type="submit"  value="continue" />
-        </form>
+    <>
+      <Navbar />
+      <div className="flex w-full py-30 items-center  justify-center">
+        <div className="h-full w-full p-5 max-w-lg justify-center gap-5 items-start flex flex-col ">
+          <h1 className="text-sm ">ADMIN LOGIN</h1>
+          <form
+            onSubmit={handleSubmit(formSubmit)}
+            className="flex w-full flex-col gap-5 "
+          >
+            <InputBox
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+              errors={errors?.email?.message}
+            />
+            <InputBox
+              type="password"
+              placeholder="Password"
+              {...register("password")}
+              errors={errors?.password?.message}
+            />
+
+            <Button type="submit" value="continue" />
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

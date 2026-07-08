@@ -22,13 +22,13 @@ const Login = () => {
     const response = loginUser(data);
     const [result, error] = await response;
 
-    console.log(error)
+    console.log(error);
 
-    if(error) {
-      toast(error.message)
+    if (error) {
+      toast(error.message);
     }
 
-    setAuth({...auth, data: result});
+    setAuth({ ...auth, data: result });
 
     if (result) navigate("/store");
   };
@@ -53,10 +53,18 @@ const Login = () => {
             {...register("password")}
             errors={errors?.password?.message}
           />
-          
-          <Button type="submit"  value="continue" />
+
+          <Button type="submit" value="continue" />
         </form>
-        <p>Don't have an account? <Link className="text-blue-500" to={"/register"} >Register</Link></p>
+        <div>
+          <p>
+            Don't have an account?{" "}
+            <Link className="text-blue-500" to={"/register"}>
+              Register
+            </Link>
+          </p>
+          <Link className="text-blue-500" to={"/admin/login"}>admin?</Link>
+        </div>
       </div>
 
       <ToastContainer />
